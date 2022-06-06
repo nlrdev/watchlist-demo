@@ -20,7 +20,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.crypto-wl_nginx.entrypoints=websecure"
       - "traefik.http.routers.crypto-wl_nginx.tls.certresolver=sslresolver"
-      - "traefik.http.routers.crypto-wl_nginx.rule=Host(`alpha.crypto-wl.co.za`)"
+      - "traefik.http.routers.crypto-wl_nginx.rule=Host(`watchlist-demo.silimasoftware.co.za`)"
       - "traefik.http.services.crypto-wl_nginx.loadbalancer.server.port=80"
     volumes:
       - website_data:/usr/src/app
