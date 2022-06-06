@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  crypto-wl:
+    build: .
+    env_file:
+      - .env
+    container_name: crypto-wl
+    restart: always
+    command: bash -c "python manage.py makemigrations && python manage.py migrate &&
+      gunicorn config.wsgi:application  -b 0.0.0.0:80"
+    volumes:
+      - website_data:/usr/src/app
+
+  crypto-wl_nginx:
+    build: ./nginx
+    restart: always
+    container_name: crypto-wl_nginx
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.crypto-wl_nginx.entrypoints=websecure"
+      - "traefik.http.routers.crypto-wl_nginx.tls.certresolver=sslresolver"
+      - "traefik.http.routers.crypto-wl_nginx.rule=Host(`alpha.crypto-wl.co.za`)"
+      - "traefik.http.services.crypto-wl_nginx.loadbalancer.server.port=80"
+    volumes:
+      - website_data:/usr/src/app
+    depends_on:
+      - crypto-wl
+
+  db-crypto-wl:
+    image: postgres
+    restart: always
+    container_name: db-crypto-wl 
+    env_file:
+      - .env
+    volumes:
+      - crypto-wl_data:/var/lib/postgresql/data
+
+volumes:
+  crypto-wl_data:
+  website_data:
+
+networks:
+  default:
+    external:
+      name: hostnet
