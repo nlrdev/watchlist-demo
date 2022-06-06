@@ -7,7 +7,7 @@ services:
       - .env
     container_name: crypto-wl
     restart: always
-    command: bash -c "python manage.py makemigrations && python manage.py migrate &&  python manage.py demolist &&
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py demolist &&
       gunicorn config.wsgi:application  -b 0.0.0.0:80"
     volumes:
       - website_data:/usr/src/app
