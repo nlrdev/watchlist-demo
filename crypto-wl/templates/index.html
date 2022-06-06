@@ -1,0 +1,6 @@
+{% extends 'main.html' %} {% block main %}
+{% if template %}
+<div id="content_wrapper">{% include template %}</div>
+{% endif %}
+{% include "src/footer.html" %}
+{% endblock %}

@@ -1,0 +1,19 @@
+<div class="row justify-content-center p-5" style="height: 100%;">
+    <div class="col-4 p-2 text-dark text-center">
+      <h4>Enter a Crypto</h4>
+      <form class="p-2" id="crypto_form" tag="get_crypto" method="POST">
+        {% csrf_token %} {% load crispy_forms_tags %}
+        {{ crypto_form | crispy }}
+        <br>
+        <input class="btn btn-lg btn-outline-dark" type="submit" value="Add To Watchlist" />
+      </form>
+    </div>    
+</div>
+<div class="container justify-content-center" style="height: 100%;">
+    <div class="p-2 text-dark text-center">
+        <div id="wactchlist_wrapper">
+            {% include "./items.html" %}
+        </div>    
+    </div>    
+</div>
+
