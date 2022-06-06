@@ -3,14 +3,18 @@ $(function () {
     event.preventDefault();
     $.ajax({
       type: "POST",
-      data: $(this).serialize(),
+      data: {
+        form:  $(this).serialize(),
+        csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').attr(
+          "value"
+        ),
       dataType: "json",
       error: function (request, error) {
         console.log(arguments);
         console.log(" Can't do because: " + error);
       },
       success: function (data) {
-        $("#crypto_form")[0].reset();
+        $("#crypto_form").reset();
         $("#msg_queue").html(data.msg_list);
         $("#wactchlist_wrapper").html(data.html);
       },
