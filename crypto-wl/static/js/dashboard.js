@@ -8,6 +8,7 @@ $(function () {
         csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').attr(
           "value"
         ),
+      },
       dataType: "json",
       error: function (request, error) {
         console.log(arguments);

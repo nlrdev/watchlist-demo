@@ -8,7 +8,7 @@ class CryptoForm(forms.Form):
 
 
 class CryptoModelForm(forms.ModelForm):
-	#name = forms.ChoiceField(label="Select a pair",choices=CryptoPair.objects.all().values_list())
+	name = forms.ChoiceField(label="Select a pair",choices=CryptoPair.objects.all().values_list())
 	class Meta:
 		model = CryptoPair
 		fields = ["name"]
